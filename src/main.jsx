@@ -7,17 +7,22 @@ import Cart from './components/Cart'
 import Navbar from './components/Navbar'
 import Notfound from './components/NotFound'
 import Shop from './components/Shop'
+import App from './App'
 
 const router = createBrowserRouter([
-  {path : "/" ,element: <Home />},
-  {path : '/cart', element: <Cart />},
-  {path : '/shop', element: <Shop />},
-  {path : '*', element: <Notfound />}
+  {
+    path: "/", element: <App />, children: [
+      { index: true, element: <Home /> },
+      { path: 'cart', element: <Cart /> },
+      { path: 'shop', element: <Shop /> },
+
+    ]
+  },
+  { path: '*', element: <Notfound /> }
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Navbar />
     <RouterProvider router={router} />
   </StrictMode>,
 )
